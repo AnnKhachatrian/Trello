@@ -1,2 +1,0 @@
-# Trello
-JavaScript bootcamp project

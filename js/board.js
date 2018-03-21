@@ -3,28 +3,35 @@ window.onload = function() {
     let modal = document.querySelector(".modal");
     let trigger = document.querySelector(".trigger");
     let createBoard = document.querySelector(".createBoard");
+    let mainBoard = document.querySelector(".mainBoard"); // modal for Boards name
+    let triggerBoard = document.querySelector(".triggerBoard"); // My Boards button
 
     function toggleModal() {
         modal.classList.toggle("show-modal");
     }
 
+    function toggleBoardModal() {
+        mainBoard.classList.toggle("show-modal");
+    }
+
     function windowOnClick(event) {
         if (event.target === modal) {
             toggleModal();
+        } else if (event.target === mainBoard) {
+            toggleBoardModal();
         }
     }
 
     trigger.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
     createBoard.addEventListener("click", toggleModal);
+    triggerBoard.addEventListener("click", toggleBoardModal);
+    window.addEventListener("click", windowOnClick);
+
 }
-
-
 
 function createBoard() {
     var boardName = document.getElementById("name").value;
 
-    console.log(boardName);
     var listName = {
         length: 0,
     };
@@ -32,24 +39,19 @@ function createBoard() {
     var board = localStorage.getItem(boardName);
 }
 
-function myFunction() {
+function mainurl() {
     var param = event.currentTarget.text;
-    window.location = 'file:///C:/Users/User/Desktop/trello/trello/main.html?Board-Name=' + param;
-
+    window.location = 'file:///C:/Users/a.khachatryan/Downloads/trello%20(1)/trello/main.html?Board-Name=' + param;
 }
 
 function myBoards() {
-    let div = document.createElement("DIV");
-    div.classList.add("modalDiv");
-    div.id = "modalDiv";
-    document.body.appendChild(div);
+    document.querySelector(".modalBoard").innerHTML = "";
     for (var i = 0; i < localStorage.length - 1; i++) {
         let boardName = document.createElement("a");
-        boardName.onclick = myFunction;
+        boardName.onclick = mainurl;
         boardName.classList.add("modalBoardName");
         var text = document.createTextNode(localStorage.key(i));
         boardName.appendChild(text);
-        document.getElementById('modalDiv').appendChild(boardName);
-
+        document.querySelector(".modalBoard").appendChild(boardName);
     }
 }
